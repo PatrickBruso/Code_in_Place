@@ -1,41 +1,60 @@
 """
 This program takes an image and returns an image where each pixel
-of the new image is the average of a 4x4 grid of pixels from the
+of the new image is the average of a 2x2 grid of pixels from the
 starting image.
 """
 
 from simpleimage import SimpleImage
 
 
-def main(image):
+def main():
+    image = SimpleImage('images/landscape.jpg')
     image_copy = SimpleImage.blank(image.width, image.height)
 
-    height_start = 0
-    width_start = 0
-    height_counter = 4
-    width_counter = 4
-    while height_counter < image.height:
-        for x in range(height_start, height_counter):
-            for y in range(width_start, width_counter):
-                pixel = image.get_pixel(x, y)
-                average_color = pixel_average(pixel)
-        height_start += 4
-        width_start += 4
-        height_counter += 4
-        width_counter += 4
-        """
-        I think I wanted nested loops that are in a separate function.  So we have a function that does the 
-        range for x and y that's 4 each time for each, then takes the average of each pixel, then returns the average.
-        Then I want another loop of some type (while or for) which calls that function.  So you would have a new range
-        that is the height and width divided by 4 and then you call the function to grid for each range.
-        for i in range(height // 4):
-            call_function(grid_size)
-        """
+    y = 0
+    x = 0
+    new_x = 0
+    new_y = 0
+    red = 0
+    green = 0
+    blue = 0
+    num = 0
+    while y < image.height:
+        while x < image.width:
+            for i in range(x, x + 2):
+                for j in range(y, y + 2):
+                    pixel = image.get_pixel(i, j)
+                    red += pixel.red
+                    green += pixel.green
+                    blue += pixel.blue
+                    num += 1
+            pixel.red = red
+            pixel.green = green
+            pixel.blue = blue
+            image_copy.set_pixel(new_x, new_y, pixel_average(pixel, num))
+            new_x += 1
+        x += 2
+        new_y += 1
+    y += 2
+
+    # image_copy.show()
 
 
-def pixel_average(pixel):
+def get_grid_average(x, y, image):
+    red = []
+    green = []
+    blue = []
+    for i in range(x, x+2):
+        for j in range(y, y+2):
+            pixel = image.get_pixel(i, j)
+            red.append(pixel.red)
+            green.append(pixel.green)
+            blue.append(pixel.blue)
+
+
+def pixel_average(pixel, num):
     # determine average of pixel to check against threshold
-    return (pixel.red + pixel.blue + pixel.green) // 3
+    return (pixel.red + pixel.blue + pixel.green) // num
 
 
 if __name__ == '__main__':
