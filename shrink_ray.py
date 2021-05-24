@@ -10,23 +10,20 @@ from simpleimage import SimpleImage
 def main():
     image = SimpleImage('images/landscape.jpg')
     image_copy = SimpleImage.blank(image.width, image.height)
-    get_grid_average(0, 0, image)
-    """
+
     y = 0
     x = 0
     x_coord = 0
     y_coord = 0
     while y < image.height:
         while x < image.width:
-            get_grid_average(x_coord, y_coord, image) # combine with next line?
-            image_copy.set_pixel(new_x, new_y, pixel_average(pixel, num))
+            image_copy.set_pixel(x_coord, y_coord, get_grid_average(x, y, image))
             x_coord += 1
-        x += 2
+            x += 2
         y_coord += 1
-    y += 2
+        y += 2
 
-    # image_copy.show()
-    """
+    image_copy.show()
 
 
 def get_grid_average(x, y, image):
