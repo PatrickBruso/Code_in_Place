@@ -14,19 +14,15 @@ def main():
     """
     y = 0
     x = 0
-    new_x = 0
-    new_y = 0
-    red = 0
-    green = 0
-    blue = 0
-    num = 0
+    x_coord = 0
+    y_coord = 0
     while y < image.height:
         while x < image.width:
-            get_grid_average(new_x, new_y, image) # combine with next line?
+            get_grid_average(x_coord, y_coord, image) # combine with next line?
             image_copy.set_pixel(new_x, new_y, pixel_average(pixel, num))
-            new_x += 1
+            x_coord += 1
         x += 2
-        new_y += 1
+        y_coord += 1
     y += 2
 
     # image_copy.show()
@@ -34,6 +30,14 @@ def main():
 
 
 def get_grid_average(x, y, image):
+    """
+    Function that takes in an x and y coordinate for a pixel on an image and
+    returns the average of the colors of a range that is 2x2 starting at that coordinate.
+    :param x: x coordinate in image
+    :param y: y coordinate in image
+    :param image: image to obtain colors from
+    :return: average pixel color over 2x2 grid area
+    """
     red = []
     green = []
     blue = []
