@@ -8,21 +8,24 @@ from simpleimage import SimpleImage
 
 
 def main():
-    image = SimpleImage('images/landscape.jpg')
+    image = SimpleImage('images/Seattle.jpg')
     image_copy = SimpleImage.blank(image.width, image.height)
 
     y = 0
     x = 0
     x_coord = 0
     y_coord = 0
-    while y < image.height:
-        while x < image.width:
+    while y < image.height - 2:
+        while x < image.width - 2:
             image_copy.set_pixel(x_coord, y_coord, get_grid_average(x, y, image))
             x_coord += 1
-            x += 2
+            x += 10
+        x = 0
+        x_coord = 0
         y_coord += 1
-        y += 2
+        y += 10
 
+    image.show()
     image_copy.show()
 
 
@@ -39,8 +42,8 @@ def get_grid_average(x, y, image):
     green = []
     blue = []
     counter = 0
-    for i in range(x, x+2):
-        for j in range(y, y+2):
+    for i in range(x, x+10):
+        for j in range(y, y+10):
             pixel = image.get_pixel(i, j)
             red.append(pixel.red)
             green.append(pixel.green)
@@ -50,11 +53,6 @@ def get_grid_average(x, y, image):
     pixel.green = sum(green) // counter
     pixel.blue = sum(blue) // counter
     return pixel
-
-
-def pixel_average(pixel, num):
-    # determine average of pixel to check against threshold
-    return (pixel.red + pixel.blue + pixel.green) // num
 
 
 if __name__ == '__main__':
