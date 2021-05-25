@@ -44,23 +44,44 @@ def color_picker(pixel):
     :param pixel: RGB value of pixel
     :return: closest RGB value from palette
     """
-    palette = [[0, 0, 0],
-               [0, 0, 170],
-               [0, 170, 1],
-               [170, 0, 0],
-               [0, 170, 170],
-               [253, 255, 82],
-               [253, 86, 252],
-               [255, 255, 255]]
-    for colors in palette:
+    palette = [[13, 43, 69],
+               [32, 60, 86],
+               [84, 78, 104],
+               [141, 105, 122],
+               [208, 129, 89],
+               [255, 170, 94],
+               [255, 212, 163],
+               [255, 236, 214]]
+
+    for i in range(len(palette)):
+        for value in palette[i]:
+            print(value[0])
+            print(value[1])
+            print(value[2])
+            distance_list = []
+            distance = math.sqrt((palette[i][j] - pixel.red) ** 2 + (color[1] - pixel.green) ** 2 + (color[2] - pixel.blue) ** 2)
+            # create pixels and put those into a list?
+            for x in range(8):
+                for y in range(8):
+                    pixel_list = [image.get_pixel(x, y)]
+
+        # strip list items into separate integers?
+        x = 0  # counter maybe don't need
+        # compare palette[i] to pixel and then put distances into list.
+        # take list and find the smallest value.
+        # get the location in list of smallest value and match to palette list.
+        # return that value of palette list (for example palette[location of smallest in list]
+        #print(palette[i])
+
+    """
+    for color in palette:
         distance_list = []
-        red = pixel.red
-        green = pixel.green
-        blue = pixel.blue
-        distance = (colors[0] - red) ^ 2 + (colors[1] - green) ^ 2 + (colors[2] - blue) ^ 2
-        print(distance)
+        distance = math.sqrt((color[0] - pixel.red) ** 2 + (color[1] - pixel.green) ** 2 + (color[2] - pixel.blue) ** 2)
+        distance_list.append(distance)
+        print(distance_list)
     # color_value = palette.get(pixel)
     # return color_value
+    """
 
 
 if __name__ == '__main__':
