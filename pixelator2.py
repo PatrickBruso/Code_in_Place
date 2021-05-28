@@ -17,7 +17,7 @@ def main():
         except FileNotFoundError:
             filename = input("Give me a filename again ")
     """
-    image = SimpleImage('images/Maddie.jpg')
+    image = SimpleImage('images/landscape.jpg')
     pixel_image = pixelate(image)  # call function that pixelates image
     image.show()
     pixel_image.show()
@@ -29,6 +29,17 @@ def pixelate(image):
     and returns a copy of the image using on colors from a set palette of colors
     """
     image_copy = SimpleImage.blank(image.width, image.height)
+    """
+    print("Palette options: \n1. Cybear - 9 colors \n2. Endesga - 32 colors \n3. Zughy - 32 colors")
+    palette_choice = input("Enter choice: ")
+    if palette_choice == 1:
+        palette = 'cybear9.png'
+    elif palette_choice == 2:
+        palette = 'endesga32.png'
+    else:
+        palette = 'zughy32.png'
+    """
+
     for new_pixel in image_copy:
         x = new_pixel.x
         y = new_pixel.y
@@ -45,61 +56,28 @@ def color_picker(pixel):
     """
     Function that takes in pixel from image and returns the pixel color from a palette
     which is the closest color
+    :param palette: User palette choice
     :param pixel: RGB value of pixel
     :return: closest RGB value from palette
     """
-    palette = [[13, 43, 69],
-               [32, 60, 86],
-               [84, 78, 104],
-               [141, 105, 122],
-               [208, 129, 89],
-               [255, 170, 94],
-               [255, 212, 163],
-               [255, 236, 214]]
+    palette = SimpleImage('Palettes/cybear9.png')
 
-    palette_2 = [[190, 74, 47],
-                 [215, 118, 67],
-                 [234, 212, 170],
-                 [228, 166, 114],
-                 [184, 111, 80],
-                 [115, 62, 57],
-                 [62, 39, 49],
-                 [162, 38, 51],
-                 [228, 59, 68],
-                 [247, 118, 34],
-                 [254, 174, 52],
-                 [254, 231, 97],
-                 [99, 199, 77],
-                 [62, 137, 72],
-                 [38, 92, 66],
-                 [25, 60, 62],
-                 [18, 78, 137],
-                 [0, 153, 219],
-                 [44, 232, 245],
-                 [255, 255, 255],
-                 [192, 203, 220],
-                 [139, 155, 180],
-                 [90, 105, 136],
-                 [58, 68, 102],
-                 [38, 43, 68],
-                 [24, 20, 37],
-                 [255, 0, 68],
-                 [104, 56, 108],
-                 [181, 80, 136],
-                 [246, 117, 122],
-                 [232, 183, 150],
-                 [194, 133, 105]]
+    palette_list = []
+
+    for color in palette:
+        rgb_list = [color.red, color.green, color.blue]
+        palette_list.append(rgb_list)
 
     distance_list = []
 
-    for color in palette_2:
-        distance = int(math.sqrt((color[0] - pixel.red) ** 2 + (color[1] - pixel.green) ** 2 +
-                                 (color[2] - pixel.blue) ** 2))
+    for color in palette_list:
+        distance = int(math.sqrt((pixel.red - color[0]) ** 2 + (pixel.green - color[1]) ** 2 +
+                                 (pixel.blue - color[2]) ** 2))
         distance_list.append(distance)
 
     closest_color = min(distance_list)
     location = distance_list.index(closest_color)
-    return palette_2[location]
+    return palette_list[location]
 
 
 if __name__ == '__main__':
