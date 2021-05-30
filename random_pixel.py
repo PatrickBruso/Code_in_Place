@@ -16,9 +16,6 @@ def main():
     image.show()
     blue_image.show()
 
-    #for i in range((image.height + image.width // 2) // 9):
-        # nested loops?
-
 
 def create_blue():
     """
@@ -31,7 +28,7 @@ def create_blue():
         y = pixel.y
         pixel.red = 0
         pixel.green = 0
-        pixel.blue = 255
+        pixel.blue = random.randint(RANDOM_MIN, RANDOM_MAX)
         image.set_pixel(x, y, pixel)
     return image
 
@@ -51,11 +48,6 @@ def create_random():
         pixel.blue = random.randint(RANDOM_MIN, RANDOM_MAX)
         image.set_pixel(x, y, pixel)
     return image
-
-
-def pixel_average(pixel):
-    # determine average of pixel to check against threshold
-    return (pixel.red + pixel.blue + pixel.green) // 3
 
 
 if __name__ == '__main__':

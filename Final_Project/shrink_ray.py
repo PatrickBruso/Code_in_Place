@@ -5,11 +5,11 @@ starting image.
 """
 
 from simpleimage import SimpleImage
-from pixelator import pixelate
+from Final_Project.pixelator import pixelate
 
 
 def main():
-    image = SimpleImage('images/Seattle.jpg')
+    image = SimpleImage('Images/landscape.jpg')
     image_copy = SimpleImage.blank(image.width // 4, image.height // 4)
 
     y = 0

@@ -8,16 +8,19 @@ import math
 
 
 def main():
-    """
-    filename = input("Give me a filename ")
+    image_list = ['dog.png', 'landscape.jpg', 'Maddie.jpg', 'Seattle.jpg']
+    print("List of files: ")
+    for images in image_list:
+        print(image_list.index(images) + 1, images)
+
+    filename = input("\nGive me a filename: ")
     while True:
         try:
-            image = SimpleImage(f'images/{filename}')
+            image = SimpleImage(f'Images/{filename}')
             break
         except FileNotFoundError:
-            filename = input("Give me a filename again ")
-    """
-    image = SimpleImage('images/landscape.jpg')
+            filename = input("Give me a filename again: ")
+
     pixel_image = pixelate(image)  # call function that pixelates image
     image.show()
     pixel_image.show()
