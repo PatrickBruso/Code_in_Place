@@ -6,10 +6,36 @@ starting image.
 
 from simpleimage import SimpleImage
 from Final_Project.pixelator import pixelate
+from Final_Project.expander import expand
 
 
 def main():
-    image = SimpleImage('Images/landscape.jpg')
+    image_list = ['dog.png', 'landscape.jpg']
+
+    print("List of files: ")
+    for images in image_list:
+        print(image_list.index(images) + 1, images)
+
+    filename = input("\nGive me a filename: ")
+    while True:
+        try:
+            image = SimpleImage(f'Images/{filename}')
+            break
+        except FileNotFoundError:
+            filename = input("Give me a filename again: ")
+
+    image_copy = shrink(image)
+
+    image.show()
+
+    new_image = pixelate(image_copy)
+
+    pixel_image = expand(new_image)
+
+    pixel_image.show()
+
+
+def shrink(image):
     image_copy = SimpleImage.blank(image.width // 4, image.height // 4)
 
     y = 0
@@ -25,12 +51,7 @@ def main():
         x_coord = 0
         y_coord += 1
         y += 4
-
-    new_image = pixelate(image_copy)
-
-    image.show()
-    image_copy.show()
-    new_image.show()
+    return image_copy
 
 
 def get_grid_average(x, y, image):
