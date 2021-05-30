@@ -8,7 +8,7 @@ import math
 
 
 def main():
-    image_list = ['dog.png', 'landscape.jpg', 'Maddie.jpg', 'Seattle.jpg']
+    image_list = ['dog.png', 'landscape.jpg']
     print("List of files: ")
     for images in image_list:
         print(image_list.index(images) + 1, images)
@@ -63,7 +63,7 @@ def color_picker(pixel):
     :param pixel: RGB value of pixel
     :return: closest RGB value from palette
     """
-    palette = SimpleImage('Palettes/cybear9.png')
+    palette = SimpleImage('Palettes/endesga32.png')
 
     palette_list = []
 
