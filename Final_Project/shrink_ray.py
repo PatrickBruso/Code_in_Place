@@ -11,6 +11,7 @@ from Final_Project.expander import expand
 
 def main():
     image_list = ['dog.png', 'landscape.jpg']
+    palette_list = ['cyber9.png', 'endesga32.png']
 
     print("List of files: ")
     for images in image_list:
