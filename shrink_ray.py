@@ -5,7 +5,7 @@ starting image.
 """
 
 from simpleimage import SimpleImage
-from pixelator2 import pixelate
+from pixelator import pixelate
 
 
 def main():
