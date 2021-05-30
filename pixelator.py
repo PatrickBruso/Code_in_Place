@@ -1,17 +1,14 @@
 """
-Program that takes in an image and shows a pixelated copy
-1. Get image to pixelate
-2. Determine what size grids to use (9x9, 4x4, etc)
-3. Create new image of the appropriate size
-4. For each grid, determine average color
-5. For each grid color, write color to pixel on new image
-6. Return image and new image
+Program that takes in an image and assigns a color from a palette to each pixel
+and returns a copy of the new image
 """
 
 from simpleimage import SimpleImage
+import math
 
 
 def main():
+    """
     filename = input("Give me a filename ")
     while True:
         try:
@@ -19,93 +16,68 @@ def main():
             break
         except FileNotFoundError:
             filename = input("Give me a filename again ")
-
-    grid_size = grid(image)  # call function to determine grid size to use
-    pixel_image = pixelate(image, grid_size)  # call function that pixelates image
-    downscale_image = downscale(image)
+    """
+    image = SimpleImage('images/landscape.jpg')
+    pixel_image = pixelate(image)  # call function that pixelates image
     image.show()
-    downscale_image.show()
+    pixel_image.show()
 
 
-def grid(image):
-    # need to work on this function to determine if the grid sizes will fit the image dimensions
-    # if image.width and image.height % 9 == 0:
-    return 9
-
-
-def pixelate(image, size):
-    image_copy = SimpleImage.blank(image.width // size, image.height // size)
+def pixelate(image):
     """
-    use some get function that takes the pixel location and 
-    returns the first grid? so for pixel 0,0 returns 0-9, 0-9?
-    
-    what if you had a counter that was set to width // 9 and another for height // 9 and then each
-    iteration you decreased the counter in a while loop so that when it hit zero you would know that 
-    the grid sections were done?
+    Function that replaces pixel from target image with pixel from a set color palette
+    and returns a copy of the image using on colors from a set palette of colors
     """
+    image_copy = SimpleImage.blank(image.width, image.height)
+    """
+    print("Palette options: \n1. Cybear - 9 colors \n2. Endesga - 32 colors \n3. Zughy - 32 colors")
+    palette_choice = input("Enter choice: ")
+    if palette_choice == 1:
+        palette = 'cybear9.png'
+    elif palette_choice == 2:
+        palette = 'endesga32.png'
+    else:
+        palette = 'zughy32.png'
+    """
+
     for new_pixel in image_copy:
-        x = new_pixel.x  # turn x and y into ranges?
-        y = new_pixel.y
-        old_pixel = image.get_pixel(x, y)  # or use get_pixel to get a range of pixels? nested loop?
-
-        """
-        for i in range(image.height // 9):
-            for j in range(9)
-        """
-        # write the color using the average function
-    return image_copy
-
-
-def average(image, size):
-    return 10
-    # function that takes grid area of original image and returns the average color for that grid
-
-
-def downscale(image):
-    """
-    Function that takes an image and for each pixel returns a new pixel that contains one of eight
-    primary colors.
-    :param image: original image
-    :return: copy of image pixelated
-    """
-    downscaled_copy = SimpleImage.blank(image.width, image.height)
-    for new_pixel in downscaled_copy:
         x = new_pixel.x
         y = new_pixel.y
         old_pixel = image.get_pixel(x, y)
-
-        color_red = str((old_pixel.red // 128))
-        color_green = str((old_pixel.green // 128))
-        color_blue = str((old_pixel.blue // 128))
-        color_key = color_red + color_blue + color_green
-
-        color = color_picker(color_key)
-
-        new_pixel.red = color[0]
-        new_pixel.green = color[1]
-        new_pixel.blue = color[2]
-
-        downscaled_copy.set_pixel(x, y, new_pixel)
-    return downscaled_copy
+        palette_color = color_picker(old_pixel)
+        new_pixel.red = palette_color[0]
+        new_pixel.green = palette_color[1]
+        new_pixel.blue = palette_color[2]
+        image_copy.set_pixel(x, y, new_pixel)
+    return image_copy
 
 
 def color_picker(pixel):
     """
-    Function that takes in a string of 3-bit rgb values and compares to a dict returning
-    the rgb value to be used for that pixel using a palette of 8 colors.
-    :param pixel: string of 3-bit values
-    :return: pixel with rgb values
+    Function that takes in pixel from image and returns the pixel color from a palette
+    which is the closest color
+    :param palette: User palette choice
+    :param pixel: RGB value of pixel
+    :return: closest RGB value from palette
     """
-    colors = {'000': [0, 0, 0],
-              '001': [0, 0, 255],
-              '010': [0, 255, 0],
-              '100': [255, 0, 0],
-              '011': [0, 255, 255],
-              '110': [255, 255, 0],
-              '101': [255, 0, 255],
-              '111': [255, 255, 255]}
-    color_value = colors.get(pixel)
-    return color_value
+    palette = SimpleImage('Palettes/cybear9.png')
+
+    palette_list = []
+
+    for color in palette:
+        rgb_list = [color.red, color.green, color.blue]
+        palette_list.append(rgb_list)
+
+    distance_list = []
+
+    for color in palette_list:
+        distance = int(math.sqrt((pixel.red - color[0]) ** 2 + (pixel.green - color[1]) ** 2 +
+                                 (pixel.blue - color[2]) ** 2))
+        distance_list.append(distance)
+
+    closest_color = min(distance_list)
+    location = distance_list.index(closest_color)
+    return palette_list[location]
 
 
 if __name__ == '__main__':
