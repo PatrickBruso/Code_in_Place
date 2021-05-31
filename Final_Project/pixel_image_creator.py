@@ -17,7 +17,7 @@ def main():
     :return: original image and pixelated copy of image
     """
     # create lists for the images and the palettes
-    image_list = ['dog.png', 'landscape.jpg']
+    image_list = ['dog.png', 'landscape.jpg', 'landscape.png']
     palette_list = ['cybear9.png', 'endesga32.png', 'ammo8.png', 'dreamscape8.png', 'funkyfuture8.png',
                     'pollen8.png', 'retrocal8.png']
 
