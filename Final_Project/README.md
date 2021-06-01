@@ -12,7 +12,7 @@ image that is the average of those 16 pixels.  Second, the program takes each pi
 copied shrunken image,  and compares it to a palette of colors.  It uses the equation:
 </p>
 
-$$\sqrt{(r_1 - r_2)^2 + (g_1 - g_2)^2 + (b_1 - b_2)^2}$$
+![Equation](Equation.png)
 
 <p>to calculate the distance between two RGB colors.  The program will calculate the distance
 for the target color and each color in a palette of colors to determine which is the closest.
