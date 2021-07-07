@@ -1,5 +1,5 @@
 """
-Use simpleimage and csv files to plot out the population of every city in the world
+Use simple image and csv files to plot out the population of every city in the world
 """
 
 import os
