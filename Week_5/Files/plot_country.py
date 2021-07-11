@@ -1,5 +1,5 @@
 """
-Use simple image and csv files to plot out the population of every city in the world
+Use simple image and csv files to let the user plot out the population of every city in the world
 """
 
 import os
@@ -61,7 +61,7 @@ def main():
         country_filename = COUNTRY_DIRECTORY + country + ".csv"
         plot_country(visualization, country_filename)
 
-    # once we're done with all the countries, show the image
+    # once done with all the countries, show the image
     visualization.show()
 
 
