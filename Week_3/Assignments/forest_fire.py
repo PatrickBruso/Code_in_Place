@@ -10,7 +10,7 @@ green, and blue values to be all the same average value.
 from simpleimage import SimpleImage
 
 INTENSITY_THRESHOLD = 1.0
-DEFAULT_FILE = 'images/greenland-fire.png'
+DEFAULT_FILE = 'Assignments/Images/greenland-fire.png'
 
 
 def find_flames(filename):

@@ -6,7 +6,7 @@ The bottom half is the mirror reflection of the top half.
 
 from simpleimage import SimpleImage
 
-DEFAULT_FILE = 'images/mt-rainier.jpg'
+DEFAULT_FILE = 'Assignments/Images/mt-rainier.jpg'
 
 
 def make_reflected(filename):
